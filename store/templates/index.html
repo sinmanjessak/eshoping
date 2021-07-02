@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+
+
+<body>
+   
+  
+  <div class="container-fluid"  >
+   
+   <div class="row p-2">
+
+     
+      <div class="col-lg-2 mx-auto border rounded pt-4 p-4  bg bg-dark bg-gradient"> 
+         <img src="https://source.unsplash.com/random/1200x1200" class="img-thumbnail" alt="...">
+         <div class="list-group mt-2 ">
+            <a href="/" class="list-group-item list-group-item-action link "
+               aria-current="true">All Products</a>
+            {% for category in Categories %}
+            <a href="/?category={{category.id}}" class="list-group-item list-group-item-action link " aria-current="true">{{category.name }}</a>          
+            {% endfor %}
+         </div>
+         <img src="https://source.unsplash.com/1200x1200" class="img-thumbnail" alt="...">
+
+      </div>
+
+
+      <div id="products" class=" col-lg-10 mx-auto  bg bg-success bg-gradient">
+         
+         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                  aria-current="true" aria-label="Slide 1"></button>
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <img src="https://source.unsplash.com/random/1000x400" class="d-block w-100" alt="shoppp" placeholder="Just Shop..!!">
+                  
+               </div>
+               <div class="carousel-item">
+                  <img src="https://source.unsplash.com//800x400" class="d-block w-100" alt="...">
+               </div>
+               <div class="carousel-item">
+                  <img src="https://source.unsplash.com/1600x900/?food,water" class="d-block w-100" alt="...">
+               </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+            </button>
+         </div>
+
+         <div class="row mx-auto mt-4 ">
+            {% for product in Products %}
+            <div class="col">
+               <div class="card mx-auto mb-3" style="width: 18rem;">
+                  <img src="{{ product.image.url}}  " class="card-img-top " alt="card image cap ">
+                  <div class="card-body border border-warning">
+                     <p class="card-title text-red">{{product.name}}</p>
+                     <p class="card-text">{{product.description}}</p>
+                     <p class="card-text"><b>{{product.price}}</b></p>
+                    
+                     
+                     <div class="card-footer  ">
+                       
+                        <div class=" row no-gutters "> 
+                           <input type="submit" value=" - " class="col-2 btn btn-secondary">
+                           <div class="text-center col"> in cart </div> 
+                           <input type="submit" value=" + " class="col-2 btn btn-secondary"> 
+                        </div>
+
+                       
+
+
+                        <form action="/" method="POST">
+                           {% csrf_token %}
+                           <input hidden type="text" name="product" value="{{product.id}}">
+                           <input type="submit" class="btn btn-warning border form-control " value="Add to Cart">
+                        </form>
+
+                        
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+          {% endfor %}
+         </div>
+      </div>
+   </div>    
+  </div>
+
+</body>
+{% endblock %}
+  
